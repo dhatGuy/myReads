@@ -1,26 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import BookList from "./components/BookList";
+import * as BooksAPI from './BooksAPI'
 
-function App() {
+class App extends React.Component {
+  state = {
+    books: []
+}
+
+componentDidMount() {
+  BooksAPI.getAll().then(books=>{
+    this.setState({books: [...books]})
+    return books
+  }).then(books=>{
+    this.setState({
+      read: books.filter(book=> book.shelf === "read"),
+      reading: books.filter(book=> book.shelf === "currentlyReading"),
+      toRead: books.filter(book=> book.shelf === "wantToRead")
+    })
+  })
+}
+
+updateBook=(book, shelf)=>{
+  // BooksAPI.update(book, shelf)
+  console.log(book,shelf)
+}
+  render(){
+    const { read,toRead, reading} = this.state;
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        MyReads
       </header>
+      <div className="books">
+        <BookList
+          books={this.state.books}
+          updateBook={this.updateBook}
+        />
+      </div>
     </div>
-  );
+  )
+  }
 }
 
 export default App;
