@@ -2,7 +2,6 @@
   /* text-align: center; */
 }
 
-
 .App-header {
   background-color: #282c34;
   display: flex;
@@ -14,10 +13,10 @@
 }
 
 .book-shelf {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
+  padding: 20px; */
 }
 
 .book {
@@ -40,9 +39,17 @@
   width: 100%;
 }
 
-.read-books,
-.to-read-books,
-.reading-books {
+.read,
+.currentlyReading,
+.want-to-read {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.read h1,
+.currentlyReading h1,
+.want-to-read h1 {
+  flex: 0 0 100%;
+  text-align: center;
 }

@@ -1,64 +1,76 @@
-import React, { Component} from "react";
-import Read from "../Read";
-import ToRead from "../ToRead";
-import Reading from "../Reading";
-import Book from "./Book"
+import React, { Component } from "react";
+import Book from "./Book";
+import { Link } from "react-router-dom";
 
 class BookList extends Component {
-  render(){
-
-    return(
+  render() {
+    const read = this.props.books.filter((book) => book.shelf === "read");
+    const wantToRead = this.props.books.filter(
+      (book) => book.shelf === "wantToRead"
+    );
+    const currentlyReading = this.props.books.filter(
+      (book) => book.shelf === "currentlyReading"
+    );
+    return (
       <div className="book-shelf">
+        <Link to="/search">Search</Link>
         <div className="read">
-        <header>Read</header>
-          {this.props.books.filter(
-            book => book.shelf === "read"
-          ).map(book=>(
-
-                <Book
-                  updateBook={()=>this.props.updateBook()}
-                  key={book.id}
-                  title={book.title}
-                  author={book.authors[0]}
-                  imageLink={book.imageLinks.smallThumbnail}
-                />
-
-
-          ))}
-          </div>
-          <div className="reading">
+          <h1>Read</h1>
+          {read.length === 0 ? (
+            <p>Empty</p>
+          ) : (
+            read.map((book) => (
+              <Book
+                book={book}
+                key={book.id}
+                shelf={book.shelf}
+                updateBook={this.props.updateBook}
+                title={book.title}
+                author={book.authors[0]}
+                imageLink={book.imageLinks.smallThumbnail}
+              />
+            ))
+          )}
+        </div>
+        <div className="currentlyReading">
           <h1>Reading</h1>
-          {this.props.books.filter(
-            book => book.shelf === "currentlyReading"
-          ).map(book=>(
-                <Book
-                  updateBook={this.props.updateBook(book)}
-                  key={book.id}
-                  title={book.title}
-                  author={book.authors[0]}
-                  imageLink={book.imageLinks.smallThumbnail}
-                />
+          {currentlyReading.length === 0 ? (
+            <p>Empty</p>
+          ) : (
+            currentlyReading.map((book) => (
+              <Book
+                book={book}
+                key={book.id}
+                shelf={book.shelf}
+                updateBook={this.props.updateBook}
+                title={book.title}
+                author={book.authors[0]}
+                imageLink={book.imageLinks.smallThumbnail}
+              />
+            ))
+          )}
+        </div>
 
-          ))}
-          </div>
-
-          <div className="want-to-read">
+        <div className="want-to-read">
           <h1>Want to Read</h1>
-          {this.props.books.filter(
-            book => book.shelf === "wantToRead"
-          ).map(book=>(
-                <Book
-                  key={book.id}
-                  updateBook={this.props.updateBook(book)}
-                  title={book.title}
-                  author={book.authors[0]}
-                  imageLink={book.imageLinks.smallThumbnail}
-                />
-
-          ))}
+          {wantToRead.length === 0 ? (
+            <p>Empty</p>
+          ) : (
+            wantToRead.map((book) => (
+              <Book
+                book={book}
+                key={book.id}
+                shelf={book.shelf}
+                updateBook={this.props.updateBook}
+                title={book.title}
+                author={book.authors[0]}
+                imageLink={book.imageLinks.smallThumbnail}
+              />
+            ))
+          )}
+        </div>
       </div>
-      </div>
-    )
+    );
   }
 }
 
