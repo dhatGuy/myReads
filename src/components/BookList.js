@@ -26,7 +26,7 @@ class BookList extends Component {
                 shelf={book.shelf}
                 updateBook={this.props.updateBook}
                 title={book.title}
-                author={book.authors[0]}
+                author={book.authors}
                 imageLink={book.imageLinks.smallThumbnail}
               />
             ))
@@ -44,7 +44,7 @@ class BookList extends Component {
                 shelf={book.shelf}
                 updateBook={this.props.updateBook}
                 title={book.title}
-                author={book.authors[0]}
+                author={book.authors}
                 imageLink={book.imageLinks.smallThumbnail}
               />
             ))
@@ -63,7 +63,7 @@ class BookList extends Component {
                 shelf={book.shelf}
                 updateBook={this.props.updateBook}
                 title={book.title}
-                author={book.authors[0]}
+                author={book.authors}
                 imageLink={book.imageLinks.smallThumbnail}
               />
             ))

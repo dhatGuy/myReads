@@ -3,12 +3,12 @@ import "./App.css";
 import BookList from "./components/BookList";
 import * as BooksAPI from "./utils/BooksAPI";
 import SearchBar from "./components/Search";
-import { Link, Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 class App extends React.Component {
   state = {
     books: [],
-    showSearch: false,
+    searchedBooks: [],
   };
 
   componentDidMount() {
@@ -18,28 +18,58 @@ class App extends React.Component {
       });
     });
   }
+  onSearch = (query) => {
+    if (query !== "") {
+      BooksAPI.search(query).then((searchedBooks) => {
+        if (searchedBooks !== undefined && searchedBooks.length > 0) {
+          const shelvedBooks = searchedBooks.map((book) => {
+            const filteredBook = this.state.books.filter(
+              (myBook) => myBook.id === book.id
+            );
+            return filteredBook.length > 0 ? filteredBook[0] : book;
+          });
+          console.log(shelvedBooks);
+          this.setState({ searchedBooks: shelvedBooks });
+        } else {
+          this.setState({ searchedBooks: [] });
+        }
+      });
+    }
+  };
 
+  debounce = (func, delay) => {
+    let timerId;
+    return (...args) => {
+      const boundFunc = func.bind(this, ...args);
+      clearTimeout(timerId);
+      timerId = setTimeout(boundFunc, delay);
+    }
+  }
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() =>
       this.setState((prevstate) => ({
-        books: prevstate.books.filter((b) => {
-          if (b.id === book.id) {
-            return (book.shelf = shelf);
-          } else {
-            return book;
-          }
-        }),
+        books: prevstate.books.filter((b) =>
+          b.id === book.id ? (book.shelf = shelf) : book
+        ),
       }))
     );
   };
   render() {
-    const { books } = this.state;
+    const { books, searchedBooks } = this.state;
     return (
       <div className="App">
         <>
           <header className="App-header">MyReads</header>
-
-          <Route path="/search" component={SearchBar} />
+          <Route
+            path="/search"
+            render={() => (
+              <SearchBar
+                onSearch={this.debounce(this.onSearch, 200)}
+                searchedBooks={searchedBooks}
+                updateBook={this.updateBook}
+              />
+            )}
+          />
           <Route
             exact
             path="/"

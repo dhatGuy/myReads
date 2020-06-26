@@ -11,14 +11,14 @@ class Book extends Component {
       <div className="book">
         <div
           className="book-cover"
-          style={{ backgroundImage: `url(${imageLink})` }}
-        ></div>
+          style={{ backgroundImage: `url(${imageLink ===undefined ? null : imageLink})` }}
+        >{imageLink? null : "No Image Available"}</div>
         <div className="book-title">{title}</div>
-        <div className="book-author">{author}</div>
+        <div className="book-author">{author && author.map(author=> <p key={author}>{author}</p>)}</div>
         <select
           onChange={(e) => this.handleChange(e, book)}
           name="dropdown"
-          value={shelf}
+          value={shelf ? shelf : "none"}
         >
           <option disabled>Move book to...</option>
           <option value="currentlyReading">Currently Reading</option>
