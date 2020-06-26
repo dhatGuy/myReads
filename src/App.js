@@ -26,9 +26,9 @@ class App extends React.Component {
             const filteredBook = this.state.books.filter(
               (myBook) => myBook.id === book.id
             );
+            console.log(filteredBook);
             return filteredBook.length > 0 ? filteredBook[0] : book;
           });
-          console.log(shelvedBooks);
           this.setState({ searchedBooks: shelvedBooks });
         } else {
           this.setState({ searchedBooks: [] });

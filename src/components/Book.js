@@ -1,8 +1,21 @@
 import React, { Component } from "react";
 
 class Book extends Component {
+  state={
+    shelf: "none"
+  }
+  componentDidMount() {
+    if(this.props.shelf) {
+      this.setState({
+        shelf: this.props.shelf
+      })
+    }
+  }
   handleChange = (e, book) => {
     const shelf = e.target.value;
+    this.setState({
+      shelf
+    })
     this.props.updateBook(book, shelf);
   };
   render() {
@@ -11,12 +24,18 @@ class Book extends Component {
       <div className="book">
         <div
           className="book-cover"
-          style={{ backgroundImage: `url(${imageLink ===undefined ? null : imageLink})` }}
-        >{imageLink ? null : "No Image Available"}</div>
+          style={{
+            backgroundImage: `url(${
+              imageLink === undefined ? null : imageLink
+            })`,
+          }}
+        >
+          {imageLink ? null : "No Image Available"}
+        </div>
         <select
           onChange={(e) => this.handleChange(e, book)}
           name="dropdown"
-          value={shelf ? shelf : "none"}
+          value={this.state.shelf}
         >
           <option disabled>Move book to...</option>
           <option value="currentlyReading">Currently Reading</option>
@@ -25,7 +44,9 @@ class Book extends Component {
           <option value="none">None</option>
         </select>
         <div className="book-title">{title}</div>
-        <div className="book-author">{author && author.map(author=> <p key={author}>{author}</p>)}</div>
+        <div className="book-author">
+          {author && author.map((author) => <p key={author}>{author}</p>)}
+        </div>
       </div>
     );
   }
