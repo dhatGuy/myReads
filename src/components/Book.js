@@ -12,9 +12,7 @@ class Book extends Component {
         <div
           className="book-cover"
           style={{ backgroundImage: `url(${imageLink ===undefined ? null : imageLink})` }}
-        >{imageLink? null : "No Image Available"}</div>
-        <div className="book-title">{title}</div>
-        <div className="book-author">{author && author.map(author=> <p key={author}>{author}</p>)}</div>
+        >{imageLink ? null : "No Image Available"}</div>
         <select
           onChange={(e) => this.handleChange(e, book)}
           name="dropdown"
@@ -26,6 +24,8 @@ class Book extends Component {
           <option value="read">Read</option>
           <option value="none">None</option>
         </select>
+        <div className="book-title">{title}</div>
+        <div className="book-author">{author && author.map(author=> <p key={author}>{author}</p>)}</div>
       </div>
     );
   }

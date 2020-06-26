@@ -13,7 +13,7 @@ class BookList extends Component {
     );
     return (
       <div className="book-shelf">
-        <Link to="/search">Search</Link>
+        <Link to="/search" className="add-book-link">Add new book</Link>
         <div className="read">
           <h1>Read</h1>
           {read.length === 0 ? (

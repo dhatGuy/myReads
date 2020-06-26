@@ -2,6 +2,15 @@
   /* text-align: center; */
 }
 
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+}
+
 .App-header {
   background-color: #282c34;
   display: flex;
@@ -21,16 +30,43 @@
 
 .book {
   display: flex;
+  flex-basis: 20%;
   flex-direction: column;
+  align-items: flex-start;
+  /* justify-content: space-between; */
   min-width: 100px;
   max-width: 200px;
-  margin-right: 10px;
+  margin: 5px 0 10px 10px;
+}
+
+@media(max-width: 1333px) {
+  .book {
+    flex-basis: 33.33%;
+  }
+}
+
+@media(max-width: 1073px) {
+  .book {
+    flex-basis: 33.33%;
+  }
+}
+
+@media(max-width: 815px) {
+  .book {
+    flex-basis: 50%;
+  }
+}
+
+@media(max-width: 555px) {
+  .book {
+    flex-basis: 100%;
+  }
 }
 
 .book-cover {
   height: 200px;
   width: 200px;
-  background-size: contain;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: #b4bdcf;
   display: flex;
@@ -42,13 +78,56 @@
   width: 100%;
 }
 
+.book-title {
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 5px;
+}
+
+.book-author p {
+  margin: 5px 0;
+  color: rgba(0, 0, 0, 0.76);
+}
+
+.book-author {
+  font-style: italic;
+  padding: 0;
+  font-size: 14px;
+}
+
+select {
+  width: 100%;
+  height: 30px;
+  font-size: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7091af;
+  border-bottom: 2px solid #3b77d1;
+  color: white;
+  transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
+
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.no-result {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+}
 .read,
 .currentlyReading,
 .want-to-read,
 .searched-books {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  align-content: flex-start;
+  justify-content: center;
 }
 
 .read h1,
@@ -56,4 +135,8 @@
 .want-to-read h1 {
   flex: 0 0 100%;
   text-align: center;
+}
+
+a{
+  list-style: none;
 }
