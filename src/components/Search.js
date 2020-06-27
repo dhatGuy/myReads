@@ -7,8 +7,12 @@ class SearchBar extends React.Component {
     query: "",
   };
   onChange = (e) => {
-    this.setState({ query: e.target.value });
-    this.props.onSearch(this.state.query);
+    e.persist();
+    this.setState(prevState=>({
+      query: e.target.value
+    }))
+    console.log(this.state.query)
+    this.props.onSearch(e.target.value);
   };
   render() {
     const { searchedBooks } = this.props;
