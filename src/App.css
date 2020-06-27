@@ -19,13 +19,7 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.book-shelf {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px; */
+  height: 8vh;
 }
 
 .book {
@@ -137,6 +131,11 @@ select {
   text-align: center;
 }
 
-a{
-  list-style: none;
+.search a,
+.add-book-link {
+  font-size: 25px;
+  text-align: right;
+  text-decoration: none;
+  margin: 0 5px;
+  font-weight: 600;
 }

@@ -19,7 +19,7 @@ class Book extends Component {
     this.props.updateBook(book, shelf);
   };
   render() {
-    const { imageLink, title, author, shelf, book } = this.props;
+    const { imageLink, title, author, book } = this.props;
     return (
       <div className="book">
         <div

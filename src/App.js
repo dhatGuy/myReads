@@ -26,7 +26,6 @@ class App extends React.Component {
             const filteredBook = this.state.books.filter(
               (myBook) => myBook.id === book.id
             );
-            console.log(filteredBook);
             return filteredBook.length > 0 ? filteredBook[0] : book;
           });
           this.setState({ searchedBooks: shelvedBooks });
@@ -43,17 +42,19 @@ class App extends React.Component {
       const boundFunc = func.bind(this, ...args);
       clearTimeout(timerId);
       timerId = setTimeout(boundFunc, delay);
-    }
-  }
+    };
+  };
   updateBook = (book, shelf) => {
+    book.shelf = shelf;
     BooksAPI.update(book, shelf).then(() =>
       this.setState((prevstate) => ({
-        books: prevstate.books.filter((b) =>
-          b.id === book.id ? (book.shelf = shelf) : book
-        ),
+        books: prevstate.books
+          .filter((b) => b.title !== book.title)
+          .concat([book]),
       }))
     );
   };
+
   render() {
     const { books, searchedBooks } = this.state;
     return (
@@ -64,7 +65,7 @@ class App extends React.Component {
             path="/search"
             render={() => (
               <SearchBar
-                onSearch={this.debounce(this.onSearch, 200)}
+                onSearch={this.debounce(this.onSearch, 100)}
                 searchedBooks={searchedBooks}
                 updateBook={this.updateBook}
               />
