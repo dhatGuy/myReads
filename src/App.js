@@ -29,10 +29,10 @@ class App extends React.Component {
             return filteredBook.length > 0 ? filteredBook[0] : book;
           });
           this.setState({ searchedBooks: shelvedBooks });
-        } else {
-          this.setState({ searchedBooks: [] });
         }
       });
+    } else {
+      this.setState({ searchedBooks: [] });
     }
   };
 
@@ -65,7 +65,7 @@ class App extends React.Component {
             path="/search"
             render={() => (
               <SearchBar
-                onSearch={this.debounce(this.onSearch, 100)}
+                onSearch={this.debounce(this.onSearch, 500)}
                 searchedBooks={searchedBooks}
                 updateBook={this.updateBook}
               />
