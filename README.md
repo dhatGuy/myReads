@@ -1,8 +1,16 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cd57ea59-bdc3-4f09-9fee-df4d9d7405f3/deploy-status)](https://app.netlify.com/sites/cranky-brattain-9eea48/deploys)
 # MyReads
 
 ## About
-MyReads project is a bookshelf app that allows you to select and categorize books you have read, curently reading or woant to read.
+MyReads project is a bookshelf app that allows you to select and categorize books 
+- read, 
+- curently reading or 
+- want to read.
 
+This app is the first project out of the three projects required for [Udacity's React NanoDegree course](https://www.udacity.com/course/react-nanodegree/nd019) 
+
+## Live Preview 
+Check out the live preview [here](https://cranky-brattain-9eea48.netlify.app/) 
 ## Installation
 Clone or download the repository to your local computer.
 Run 
